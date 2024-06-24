@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_fan_status_and_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fan Status: OFF  |  Current Speed: 0"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <ToggleButton
+        android:id="@+id/toggle_fan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="Turn Fan OFF"
+        android:textOff="Turn Fan ON"
+        android:layout_below="@id/tv_fan_status_and_speed"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btn_increase_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Increase Speed"
+        android:layout_below="@id/toggle_fan"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:id="@+id/btn_decrease_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decrease Speed"
+        android:layout_below="@id/toggle_fan"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+type hal_fancontroller_service, domain;
+hal_server_domain(hal_fancontroller_service, hal_fancontroller)
+type hal_fancontroller_service_exec, exec_type, vendor_file_type, vendor_file_type, file_type;
+# hal_fancontroller_service servicemanager and binder access
+allow shell hal_fancontroller_service:binder { call transfer };
+allow servicemanager hal_fancontroller_service:dir search;
+allow servicemanager hal_fancontroller_service:file { open read };
+allow servicemanager hal_fancontroller_service:process getattr;
+allow hal_fancontroller_service servicemanager:binder { call transfer};
+allow hal_fancontroller_service system_server:binder call;
+allow hal_fancontroller_service default_android_service:service_manager add;
+allow untrusted_app default_android_service:service_manager find;
+allow untrusted_app hal_fancontroller_service:binder call;
+
+init_daemon_domain(hal_fancontroller_service)

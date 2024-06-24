@@ -1,0 +1,8 @@
+<hal format="aidl" optional="true">
+        <name>android.hardware.fancontroller</name>
+         <version>1</version>
+         <interface>
+             <name>IFancontroller</name>
+             <instance>default</instance>
+         </interface>
+     </hal>
