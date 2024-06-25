@@ -37,21 +37,50 @@ public class Fancontroller extends Activity {
 
         toggleFan.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                fanSpeedClient.turnFanOn();
+                if (fanSpeedClient.isFanOn()) {
+                    Toast.makeText(Fancontroller.this, "Fan already ON", Toast.LENGTH_SHORT).show();
+                } else {
+                    fanSpeedClient.turnFanOn();
+                    Toast.makeText(Fancontroller.this, "Fan turned ON", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                fanSpeedClient.turnFanOff();
+                if (!fanSpeedClient.isFanOn()) {
+                    Toast.makeText(Fancontroller.this, "Fan already OFF", Toast.LENGTH_SHORT).show();
+                } else {
+                    fanSpeedClient.turnFanOff();
+                    Toast.makeText(Fancontroller.this, "Fan turned OFF", Toast.LENGTH_SHORT).show();
+                }
             }
             updateFanStatusAndSpeed();
         });
 
         btnIncreaseSpeed.setOnClickListener(v -> {
-            fanSpeedClient.increaseFanSpeed();
-            updateFanStatusAndSpeed();
+            if (fanSpeedClient.isFanOn()) {
+                if (fanSpeedClient.getFanSpeed() < 5) {
+                    fanSpeedClient.increaseFanSpeed();
+                    updateFanStatusAndSpeed();
+                } else {
+                    Toast.makeText(Fancontroller.this, "Maximum speed reached", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(Fancontroller.this, "Turn Fan ON first", Toast.LENGTH_SHORT).show();
+            }
         });
 
         btnDecreaseSpeed.setOnClickListener(v -> {
-            fanSpeedClient.decreaseFanSpeed();
-            updateFanStatusAndSpeed();
+            if (fanSpeedClient.isFanOn()) {
+                if (fanSpeedClient.getFanSpeed() > 1) {
+                    fanSpeedClient.decreaseFanSpeed();
+                    updateFanStatusAndSpeed();
+                } else {
+                    Toast.makeText(Fancontroller.this, "Minimum speed reached", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(Fancontroller.this, "Turn Fan ON first", Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
 
