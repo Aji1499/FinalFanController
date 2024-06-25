@@ -56,11 +56,11 @@ public class Fancontroller extends Activity {
 
         btnIncreaseSpeed.setOnClickListener(v -> {
             if (fanSpeedClient.isFanOn()) {
-                if (fanSpeedClient.getFanSpeed() < 5) {
+                if (fanSpeedClient.getFanSpeed() == 5) {
+                    Toast.makeText(Fancontroller.this, "Maximum speed reached", Toast.LENGTH_SHORT).show();
+                } else {
                     fanSpeedClient.increaseFanSpeed();
                     updateFanStatusAndSpeed();
-                } else {
-                    Toast.makeText(Fancontroller.this, "Maximum speed reached", Toast.LENGTH_SHORT).show();
                 }
             }
             else{
@@ -70,11 +70,11 @@ public class Fancontroller extends Activity {
 
         btnDecreaseSpeed.setOnClickListener(v -> {
             if (fanSpeedClient.isFanOn()) {
-                if (fanSpeedClient.getFanSpeed() > 1) {
+                if (fanSpeedClient.getFanSpeed() == 1) {
+                    Toast.makeText(Fancontroller.this, "Minimum speed reached", Toast.LENGTH_SHORT).show();
+                } else {
                     fanSpeedClient.decreaseFanSpeed();
                     updateFanStatusAndSpeed();
-                } else {
-                    Toast.makeText(Fancontroller.this, "Minimum speed reached", Toast.LENGTH_SHORT).show();
                 }
             }
             else{
