@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import android.widget.Toast;
 
 
 public class Fancontroller extends Activity {
