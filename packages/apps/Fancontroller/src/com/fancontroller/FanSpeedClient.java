@@ -4,6 +4,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+import android.hardware.fancontroller.IFancontroller;
 
 /**
  * Client class for interacting with the FanSpeedControlService.

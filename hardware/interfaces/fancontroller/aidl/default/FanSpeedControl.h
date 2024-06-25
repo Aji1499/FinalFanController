@@ -6,7 +6,7 @@ namespace aidl{
             namespace fancontroller{
                 class FanSpeedControl : public BnFancontroller{
                 public:
-                    int fanSpeed=0;
+                    int fanSpeed=1;
                     bool fanOn = false;
 
                     ndk::ScopedAStatus increaseFanSpeed(bool* _aidl_return);
