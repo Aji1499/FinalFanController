@@ -1,4 +1,6 @@
-#define LOG_TAG "FanSpeedControl"
+#define LOG_TAG "FanController_hal_service"
+#include <utils/Log.h>
+#include <log/log.h>
 
 #include <android-base/logging.h>
 #include <android/binder_manager.h>
@@ -8,7 +10,6 @@
 #include "FanSpeedControl.h"
 
 using aidl::android::hardware::fancontroller::FanSpeedControl;
-using std::string_literals::operator""s;
 
 void logd(std::string msg) {
     std::cout << msg << std::endl;
@@ -21,30 +22,24 @@ void loge(std::string msg) {
 }
 
 int main() {
-    // Enable vndbinder to allow vendor-to-venfor binder call
-    //android::ProcessState::initWithDriver("/dev/binder");
 
     ABinderProcess_setThreadPoolMaxThreadCount(0);
     //   ABinderProcess_startThreadPool();
 
-    std::shared_ptr<FanSpeedControl> fanspeedcontrol = ndk::SharedRefBase::make<FanSpeedControl>();
-    const std::string name =std::string()+ FanSpeedControl::descriptor + "/default"s;
+    ALOGD("Fancontroller Service main() Starts here");
 
-    /*if (fanspeedcontrol != nullptr) {
-        if(AServiceManager_addService(fanspeedcontrol->asBinder().get(), name.c_str()) != STATUS_OK) {
-            loge("Failed to register IFanSpeedControl service");
-            return -1;
-        }
-    } else {
-        loge("Failed to get IFanSpeedControl instance");
-        return -1;
-    }*/
+    std::shared_ptr<FanSpeedControl> fanspeedcontrol = ndk::SharedRefBase::make<FanSpeedControl>();
+    const std::string name =std::string()+ FanSpeedControl::descriptor + "/default";
 
     binder_status_t status = AServiceManager_addService(fanspeedcontrol->asBinder().get(), name.c_str());
     CHECK_EQ(status, STATUS_OK);
 
-    logd("IFanSpeedControl service starts to join service pool");
+    logd("fancontrollerservice started sucessfully, status= "+std::to_string(status));
+
+    ALOGD("IFancontroller service starts to join service pool");
     ABinderProcess_joinThreadPool();
+
+    ALOGE("Failed to join Thread Pool");
 
     return EXIT_FAILURE;  // should not reached
 }

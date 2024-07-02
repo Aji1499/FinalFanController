@@ -1,4 +1,4 @@
-#define LOG_TAG "FanSpeedControl"
+#define LOG_TAG "FanController_hal"
 
 #include <utils/Log.h>
 #include <iostream>
@@ -13,64 +13,66 @@ namespace aidl {
                     if(!fanOn){
                         fanOn = true;//turn on the fan
                         *_aidl_return = true;//return value on success
-                        ALOGD("Fan turned ON");//log statement
+                        ALOGD("turnFanOn() : Fan turned ON");//log statement
                         return ndk::ScopedAStatus::ok();//return status
                     }
+                    else{
                     *_aidl_return = false;//return value on failure
-                    ALOGE("Fan is already ON");//log statement
+                    ALOGE("turnFanOn() : Fan is already ON");//log statement
                     return ndk::ScopedAStatus::ok();//return status
+                    }
                 }
                 ndk::ScopedAStatus FanSpeedControl::turnFanOff(bool* _aidl_return) {
                     if(fanOn){
                         fanOn = false;//turn off the fan
                         *_aidl_return = true;//return value on success
-                        ALOGD("Fan turned OFF");//log statement
+                        ALOGD("turnFanOff() : Fan turned OFF");//log statement
                         return ndk::ScopedAStatus::ok();//return status
                     }
                     *_aidl_return = false;//return value on failure
-                    ALOGE("Fan is already OFF");//log statement
+                    ALOGE("turnFanOff() : Fan is already OFF");//log statement
                     return ndk::ScopedAStatus::ok();//return status
                 }
                 ndk::ScopedAStatus FanSpeedControl::isFanOn(bool* _aidl_return) {
                     if (fanOn){
                         *_aidl_return = true;//return value on success
-                        ALOGD("Fan is ON");//log statement
+                        ALOGD("isFanOn() : Fan is ON");
                         return ndk::ScopedAStatus::ok();//return status
                     }
                     *_aidl_return = false;//return value on failure
-                    ALOGD("Fan is OFF");//log statement
+                    ALOGD("isFanOn() : Fan is OFF");//log statement
                     return ndk::ScopedAStatus::ok();//return status
                 }
                 ndk::ScopedAStatus FanSpeedControl::increaseFanSpeed(bool* _aidl_return){
                     if(fanSpeed <5){
                         fanSpeed++;//increase fan speed
                         *_aidl_return = true;//return value on success
-                        ALOGD("Increased Fan Speed");//log statement
-                        return ndk::ScopedAStatus::ok();//return status
-                    }
+                        ALOGD("increaseFanSpeed() : Increased Fan Speed");//log statement
+                    }else{
                     *_aidl_return = false;//return value on failure
-                    ALOGE("Fan Speed is already at maximum");//log statement
+                    ALOGE("increaseFanSpeed() : Fan Speed is already at maximum");//log statement
+                    }                    
                     return ndk::ScopedAStatus::ok();//return status
                 }
-                ndk::ScopedAStatus FanSpeedControl::decreaseFanSpeed(bool* _aidl_return) {
-                    if(fanSpeed > 1){
+                ndk::ScopedAStatus FanSpeedControl::decreaseFanSpeed(bool* _aidl_return) {  
+                   if(fanSpeed > 1){
                         fanSpeed--;//decrease fan speed
                         *_aidl_return = true;//return value on success
-                        ALOGD("Decreased Fan Speed");//log statement
+                        ALOGD("decreaseFanSpeed() : Decreased Fan Speed");//log statement
                         return ndk::ScopedAStatus::ok();//return status
                     }
                     *_aidl_return = false;//return value on failure
-                    ALOGE("Fan Speed is already at minimum");//log statement
+                    ALOGE("decreaseFanSpeed() : Fan Speed is already at minimum");//log statement
                     return ndk::ScopedAStatus::ok();//return status
                 }
                 ndk::ScopedAStatus FanSpeedControl::getFanSpeed(int32_t* _aidl_return) {
                     if(fanOn){
                         *_aidl_return = fanSpeed;//return value on success
-                        ALOGD("Fan speed returned successfully");//log statement
+                        ALOGD("getFanSpeed() : Fan speed returned successfully = %d", fanSpeed);
                         return ndk::ScopedAStatus::ok();//return status
                     }
                     *_aidl_return = 0;//return value on failure
-                    ALOGE("Fan is off, so returned 0");//log statement
+                    ALOGE("getFanSpeed() : Fan is off, Fanspeed = 0");//log statement
                     return ndk::ScopedAStatus::ok();//return status
                 }
             }

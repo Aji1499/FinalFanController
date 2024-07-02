@@ -11,7 +11,7 @@ import android.hardware.fancontroller.IFancontroller;
  * Provides methods to control the fan speed.
  */
 public class FanSpeedClient {
-    private static final String TAG = "FanSpeedClient";
+    private static final String TAG = "FanController_systemapp";
     private static final String IFANSPEEDCONTROL_SERVICE="android.hardware.fancontroller.IFancontroller/default";
     private IFancontroller fanSpeedControlService;
 

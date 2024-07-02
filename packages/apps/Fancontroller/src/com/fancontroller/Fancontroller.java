@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.Toast;
+<<<<<<< Updated upstream
+=======
+import android.util.Log;
+>>>>>>> Stashed changes
 
 
 public class Fancontroller extends Activity {
@@ -18,6 +22,7 @@ public class Fancontroller extends Activity {
     private ToggleButton toggleFan;
     private Button btnIncreaseSpeed;
     private Button btnDecreaseSpeed;
+    private static final String TAG = "FanController_systemapp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +45,20 @@ public class Fancontroller extends Activity {
             if (isChecked) {
                 if (fanSpeedClient.isFanOn()) {
                     Toast.makeText(Fancontroller.this, "Fan already ON", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,"Fan already ON");
                 } else {
                     fanSpeedClient.turnFanOn();
                     Toast.makeText(Fancontroller.this, "Fan turned ON", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,"Fan turned ON");
                 }
             } else {
                 if (!fanSpeedClient.isFanOn()) {
                     Toast.makeText(Fancontroller.this, "Fan already OFF", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,"Fan already OFF");
                 } else {
                     fanSpeedClient.turnFanOff();
                     Toast.makeText(Fancontroller.this, "Fan turned OFF", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,"Fan turned OFF");
                 }
             }
             updateFanStatusAndSpeed();
@@ -59,6 +68,7 @@ public class Fancontroller extends Activity {
             if (fanSpeedClient.isFanOn()) {
                 if (fanSpeedClient.getFanSpeed() == 5) {
                     Toast.makeText(Fancontroller.this, "Maximum speed reached", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,"fan speed is maximum");
                 } else {
                     fanSpeedClient.increaseFanSpeed();
                     updateFanStatusAndSpeed();
@@ -66,6 +76,7 @@ public class Fancontroller extends Activity {
             }
             else{
                 Toast.makeText(Fancontroller.this, "Turn Fan ON first", Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"Turn Fan ON first");
             }
         });
 
@@ -73,6 +84,7 @@ public class Fancontroller extends Activity {
             if (fanSpeedClient.isFanOn()) {
                 if (fanSpeedClient.getFanSpeed() == 1) {
                     Toast.makeText(Fancontroller.this, "Minimum speed reached", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,"fan speed is minimum");
                 } else {
                     fanSpeedClient.decreaseFanSpeed();
                     updateFanStatusAndSpeed();
@@ -80,6 +92,8 @@ public class Fancontroller extends Activity {
             }
             else{
                 Toast.makeText(Fancontroller.this, "Turn Fan ON first", Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"Turn Fan ON first");
+
             }
 
         });
