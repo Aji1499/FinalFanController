@@ -8,10 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.Toast;
-<<<<<<< Updated upstream
-=======
+
+
 import android.util.Log;
->>>>>>> Stashed changes
+
 
 
 public class Fancontroller extends Activity {
